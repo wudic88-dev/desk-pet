@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"from PIL import Image, ImageDraw; print\\('Pillow OK'\\)\")",
+      "Bash(python tools/generate_assets.py)",
+      "Bash(python -c \"from PySide6.QtWidgets import QApplication; print\\('PySide6 OK'\\)\")",
+      "Bash(timeout 5 python main.py)",
+      "Bash(python -m py_compile main.py ui/pet_window.py ui/animation_engine.py ui/tray_manager.py config.py utils/logger.py)",
+      "Bash(python -m py_compile ui/pet_window.py ui/animation_engine.py)",
+      "Bash(python -m py_compile core/asset_manager.py ui/animation_engine.py ui/pet_window.py main.py)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}
