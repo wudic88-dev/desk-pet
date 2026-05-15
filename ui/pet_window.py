@@ -119,3 +119,12 @@ class PetWindow(QWidget):
 
     def hideEvent(self, event):
         super().hideEvent(event)
+
+    # ---- 设置面板 ----
+
+    def show_settings(self):
+        """打开设置面板"""
+        from ui.settings_dialog import SettingsDialog
+
+        dialog = SettingsDialog(self)
+        dialog.exec()
