@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     # Kimi API
     kimi_api_key: str = Field(default="", alias="KIMI_API_KEY")
     kimi_model: str = Field(default="moonshot-v1-8k", alias="KIMI_MODEL")
-    kimi_base_url: str = Field(default="https://api.moonshot.cn/v1", alias="KIMI_BASE_URL")
+    kimi_base_url: str = Field(default="https://api.moonshot.cn", alias="KIMI_BASE_URL")
 
     # 宠物配置
     pet_name: str = Field(default="小橘", alias="PET_NAME")

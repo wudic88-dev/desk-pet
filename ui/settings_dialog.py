@@ -46,7 +46,7 @@ class SettingsDialog(QDialog):
         ai_layout.addRow("API Key:", self.api_key_input)
 
         self.base_url_input = QLineEdit()
-        self.base_url_input.setPlaceholderText("https://api.moonshot.cn/v1")
+        self.base_url_input.setPlaceholderText("https://api.moonshot.cn")
         ai_layout.addRow("Base URL:", self.base_url_input)
 
         self.model_input = QLineEdit()
@@ -109,7 +109,7 @@ class SettingsDialog(QDialog):
         """从数据库加载设置"""
         self.api_key_input.setText(self._db.get_setting("KIMI_API_KEY", ""))
         self.base_url_input.setText(
-            self._db.get_setting("KIMI_BASE_URL", "https://api.moonshot.cn/v1")
+            self._db.get_setting("KIMI_BASE_URL", "https://api.moonshot.cn")
         )
         self.model_input.setText(self._db.get_setting("KIMI_MODEL", "moonshot-v1-8k"))
         self.name_input.setText(self._db.get_setting("PET_NAME", "小橘"))

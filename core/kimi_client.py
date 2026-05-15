@@ -104,11 +104,19 @@ class KimiClient:
             logger.error(f"网络请求失败: {e}")
             raise RuntimeError(f"网络请求失败: {e}") from e
 
+    def _build_api_url(self) -> str:
+        """构建 API URL，自动处理 base_url 是否已包含 /v1"""
+        base = self._base_url
+        if base.endswith("/v1"):
+            base = base[:-3]
+        return f"{base}/v1/chat/completions"
+
     def _chat_stream(self, payload: dict) -> Generator[str, None, None]:
         """流式请求，逐字返回"""
+        url = self._build_api_url()
         with self._client.stream(
             "POST",
-            f"{self._base_url}/v1/chat/completions",
+            url,
             json=payload,
         ) as response:
             if response.status_code >= 400:
@@ -146,8 +154,9 @@ class KimiClient:
 
     def _chat_sync(self, payload: dict) -> str:
         """普通请求，一次性返回"""
+        url = self._build_api_url()
         response = self._client.post(
-            f"{self._base_url}/v1/chat/completions",
+            url,
             json=payload,
         )
         response.raise_for_status()
