@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (
 )
 
 from core.chat_worker import ChatWorker
-from core.kimi_client import KimiClient
+from core.ai_client import AIClient
 from utils.logger import setup_logger
 
 logger = setup_logger()
@@ -32,7 +32,7 @@ class ChatBubble(QWidget):
     def __init__(self, pet_window: QWidget, parent=None):
         super().__init__(parent)
         self._pet = pet_window
-        self._client = KimiClient()
+        self._client = AIClient()
         self._worker: ChatWorker | None = None
         self._current_reply = ""
 

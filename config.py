@@ -5,10 +5,10 @@ from pydantic import Field
 class Settings(BaseSettings):
     """应用配置"""
 
-    # Kimi API
+    # AI API (兼容 OpenAI 格式，默认 DeepSeek)
     kimi_api_key: str = Field(default="", alias="KIMI_API_KEY")
-    kimi_model: str = Field(default="moonshot-v1-8k", alias="KIMI_MODEL")
-    kimi_base_url: str = Field(default="https://api.moonshot.cn", alias="KIMI_BASE_URL")
+    kimi_model: str = Field(default="deepseek-chat", alias="KIMI_MODEL")
+    kimi_base_url: str = Field(default="https://api.deepseek.com", alias="KIMI_BASE_URL")
 
     # 宠物配置
     pet_name: str = Field(default="小橘", alias="PET_NAME")

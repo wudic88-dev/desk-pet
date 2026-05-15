@@ -2,7 +2,7 @@
 
 from PySide6.QtCore import QThread, Signal
 
-from core.kimi_client import KimiClient
+from core.ai_client import AIClient
 from utils.logger import setup_logger
 
 logger = setup_logger()
@@ -21,7 +21,7 @@ class ChatWorker(QThread):
     response_done = Signal()
     error_occurred = Signal(str)
 
-    def __init__(self, client: KimiClient, user_message: str, parent=None):
+    def __init__(self, client: AIClient, user_message: str, parent=None):
         super().__init__(parent)
         self._client = client
         self._user_message = user_message

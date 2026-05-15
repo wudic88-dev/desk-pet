@@ -1,4 +1,4 @@
-"""Kimi API 客户端 - 封装对话和流式输出"""
+"""AI 对话客户端 - 封装对话和流式输出"""
 
 import json
 from dataclasses import dataclass
@@ -21,8 +21,8 @@ class ChatMessage:
     content: str
 
 
-class KimiClient:
-    """Kimi API 客户端
+class AIClient:
+    """AI 对话客户端
 
     兼容 OpenAI Chat Completions API 格式。
     支持普通请求和流式（SSE）输出。
@@ -39,7 +39,7 @@ class KimiClient:
         self._model = model or settings.kimi_model
 
         if not self._api_key:
-            logger.warning("Kimi API Key 未配置，请在 .env 中设置 KIMI_API_KEY")
+            logger.warning("API Key 未配置，请在 .env 中设置 KIMI_API_KEY")
 
         self._client = httpx.Client(
             timeout=httpx.Timeout(60.0, connect=10.0),
