@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt, QPoint, QTimer
-from PySide6.QtGui import QMouseEvent
+from PySide6.QtGui import QMouseEvent, QBitmap, QPainter
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
 
 from core.asset_manager import AssetManager
@@ -60,17 +60,17 @@ class PetWindow(QWidget):
         logger.info("宠物窗口初始化完成")
 
     def _update_mask(self, _frame_idx=None):
-        """根据当前图片的非透明区域更新窗口遮罩，实现只显示宠物本身"""
+        """根据当前图片的 alpha 通道更新窗口遮罩，只显示非透明区域"""
         pixmap = self.pet_label.pixmap()
-        if pixmap and not pixmap.isNull():
-            mask = pixmap.mask()
-            if mask and not mask.isNull():
-                self.setMask(mask)
-            else:
-                # 若 pixmap 没有 mask，用透明色创建
-                mask = pixmap.createMaskFromColor(Qt.transparent)
-                if mask and not mask.isNull():
-                    self.setMask(mask)
+        if not pixmap or pixmap.isNull():
+            return
+        # 在单色 QBitmap 上绘制 pixmap，alpha > 0 变为白色(可见)，alpha = 0 保持黑色(不可见)
+        mask = QBitmap(pixmap.size())
+        mask.fill(Qt.black)
+        painter = QPainter(mask)
+        painter.drawPixmap(0, 0, pixmap)
+        painter.end()
+        self.setMask(mask)
 
     # ---- 鼠标事件 ----
 
